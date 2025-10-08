@@ -59,7 +59,7 @@ jobs:
     - name: mkdir
       run: mkdir build
     - name: cmake
-      run: cd build && cmake -G Ninja .. && ninja libresprite
+      run: cd build && cmake -G Ninja .. && ninja lunosprite
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1

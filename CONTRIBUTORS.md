@@ -1,8 +1,8 @@
-# Contributors to LibreSprite
+# Contributors to LunoSprite
 * Add your name here!
 
 ## Shout-outs
-LibreSprite includes color palettes created by:
+LunoSprite includes color palettes created by:
 * [Richard "DawnBringer" Fhager](http://pixeljoint.com/p/23821.htm) palettes, [16 colors](http://pixeljoint.com/forum/forum_posts.asp?TID=12795),  [32 colors](http://pixeljoint.com/forum/forum_posts.asp?TID=16247).
 * [Arne Niklas Jansson](http://androidarts.com/) palettes, [16 colors](http://androidarts.com/palette/16pal.htm), [32 colors](http://wayofthepixel.net/index.php?topic=15824.msg144494).
 

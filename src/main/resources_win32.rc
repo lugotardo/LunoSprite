@@ -20,12 +20,12 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "Comments", "https://github.com/LibreSprite/LibreSprite"
-            VALUE "FileDescription", "LibreSprite - Animated sprites editor & pixel art tool"
+            VALUE "FileDescription", "LunoSprite - Animated sprites editor & pixel art tool"
             VALUE "FileVersion", "1,0,0,0"
-            VALUE "InternalName", "libresprite"
-            VALUE "LegalCopyright", "Copyright (C) 2001-2016 by David Capello, 2016-2023 LibreSprite contributors"
-            VALUE "OriginalFilename", "libresprite.exe"
-            VALUE "ProductName", "LIBRESPRITE"
+            VALUE "InternalName", "lunosprite"
+            VALUE "LegalCopyright", "Copyright (C) 2001-2016 by David Capello, 2016-2023 LibreSprite contributors, 2025 LunoSprite"
+            VALUE "OriginalFilename", "lunosprite.exe"
+            VALUE "ProductName", "LUNOSPRITE"
             VALUE "ProductVersion", "1,1,0,0"
         END
     END

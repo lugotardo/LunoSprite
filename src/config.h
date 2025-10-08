@@ -1,5 +1,5 @@
 // Aseprite    | Copyright (C) 2001-2016  David Capello
-// LibreSprite | Copyright (C) 2018-2021  LibreSprite contributors
+// LunoSprite | Copyright (C) 2018-2021  LunoSprite contributors
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License version 2 as
@@ -23,7 +23,7 @@
 #endif
 
 // General information
-#define PACKAGE "LibreSprite"
+#define PACKAGE "LunoSprite"
 #define VERSION "1.2-dev"
 #define PACKAGE_AND_VERSION PACKAGE " " VERSION
 

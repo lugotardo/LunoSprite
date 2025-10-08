@@ -1,5 +1,5 @@
 # Aseprite     | Copyright (C) 2001-2016  David Capello
-# LibreSprite  | Copyright (C)      2021  LibreSprite contributors
+# LunoSprite  | Copyright (C)      2021  LunoSprite contributors
 
 ######################################################################
 # Common definitions for all Aseprite libraries/projects
@@ -114,12 +114,12 @@ if(WIN32)
     main/settings.manifest)
 endif()
 
-add_executable(libresprite WIN32
+add_executable(lunosprite WIN32
   main/main.cpp
   ${win32_resources}
   ${x11_resources})
 
-target_link_libraries(libresprite ${KEEP_INJECTIONS_BEGIN}
+target_link_libraries(lunosprite ${KEEP_INJECTIONS_BEGIN}
   app-lib
   base-lib
   cfg-lib
@@ -148,16 +148,16 @@ target_link_libraries(libresprite ${KEEP_INJECTIONS_BEGIN}
   ${FREETYPE_LIBRARIES}
   ${PLATFORM_LIBS})
 
-install(TARGETS libresprite
+install(TARGETS lunosprite
   RUNTIME DESTINATION bin)
 
 install(DIRECTORY ../data
-  DESTINATION share/libresprite)
+  DESTINATION share/lunosprite)
 else()
-  add_custom_target(libresprite DEPENDS app-lib)
+  add_custom_target(lunosprite DEPENDS app-lib)
 endif()
 
-add_dependencies(libresprite copy_data)
+add_dependencies(lunosprite copy_data)
 
 ######################################################################
 # Tests
