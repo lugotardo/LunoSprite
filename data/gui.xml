@@ -793,7 +793,7 @@
       <menu text="&amp;Help">
         <item command="Launch" text="Readme">
           <param name="type" value="url" />
-          <param name="path" value="https://github.com/LunoSprite/LunoSprite#readme" />
+          <param name="path" value="https://github.com/LibreSprite/LibreSprite#readme" />
         </item>
         <separator />
         <item command="Launch" text="Quick &amp;Reference">
@@ -802,11 +802,11 @@
         </item>
         <item command="Launch" text="Documentation">
           <param name="type" value="url" />
-          <param name="path" value="https://github.com/LunoSprite/lunosprite.github.io/wiki" />
+          <param name="path" value="https://github.com/LibreSprite/libresprite.github.io/wiki" />
         </item>
         <item command="Launch" text="Tutorial">
           <param name="type" value="url" />
-          <param name="path" value="https://github.com/LunoSprite/lunosprite.github.io/wiki" />
+          <param name="path" value="https://github.com/LibreSprite/libresprite.github.io/wiki" />
         </item>
         <separator />
         <item command="Launch" text="Release Notes">
