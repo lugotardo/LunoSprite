@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.4.1)
-project(LunoSprite C CXX)
+project(LibreSprite C CXX)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -701,9 +701,9 @@ set(SRC_FILES
   ${SRC}/undo/undo_history.cpp
 )
 
-add_executable(lunosprite ${SRC_FILES})
+add_executable(libresprite ${SRC_FILES})
 
-target_link_libraries( lunosprite
+target_link_libraries( libresprite
                         SDL2
                         SDL2_image
                         SDL2_ttf

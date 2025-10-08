@@ -248,7 +248,7 @@ public:
       if (!m_scaleWarningShown) {
           m_scaleWarningShown = true;
           ui::Alert::show(PACKAGE
-                          "<<Restart LunoSprite to apply this change"
+                          "<<Restart LibreSprite to apply this change"
                           "||&OK");
       }
     }
