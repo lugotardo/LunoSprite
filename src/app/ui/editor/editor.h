@@ -278,7 +278,6 @@ namespace app {
     frame_t m_frame;              // Active frame in the editor
     render::Zoom m_zoom;          // Zoom in the editor
     DocumentPreferences& m_docPref;
-    DocumentPreferences& m_globPref;
 
     // Brush preview
     BrushPreview m_brushPreview;
@@ -299,8 +298,7 @@ namespace app {
 
     base::ScopedConnection m_fgColorChangeConn;
     base::ScopedConnection m_contextBarBrushChangeConn;
-    base::ScopedConnection m_showExtrasConnDoc;
-    base::ScopedConnection m_showExtrasConnGlob;
+    base::ScopedConnection m_showExtrasConn;
 
     // Slots listeing document preferences.
     base::ScopedConnection m_tiledConn;

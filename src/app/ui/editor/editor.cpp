@@ -155,7 +155,6 @@ Editor::Editor(Document* document, EditorFlags flags)
   , m_frame(frame_t(0))
   , m_zoom(1, 1)
   , m_docPref(Preferences::instance().document(document))
-  , m_globPref(Preferences::instance().document(nullptr))
   , m_brushPreview(this)
   , m_lastDrawingPosition(-1, -1)
   , m_toolLoopModifiers(tools::ToolLoopModifiers::kNone)
@@ -198,9 +197,8 @@ Editor::Editor(Document* document, EditorFlags flags)
   m_bgConn = m_docPref.bg.AfterChange.connect(base::Bind<void>(&Editor::invalidate, this));
   m_onionskinConn = m_docPref.onionskin.AfterChange.connect(base::Bind<void>(&Editor::invalidate, this));
   m_symmetryModeConn = Preferences::instance().symmetryMode.enabled.AfterChange.connect(base::Bind<void>(&Editor::invalidateIfActive, this));
-  m_showExtrasConnDoc = m_docPref.show.AfterChange.connect(
-      base::Bind<void>(&Editor::onShowExtrasChange, this));
-  m_showExtrasConnGlob = m_globPref.show.AfterChange.connect(
+  m_showExtrasConn =
+    m_docPref.show.AfterChange.connect(
       base::Bind<void>(&Editor::onShowExtrasChange, this));
 
   m_document->addObserver(this);
@@ -276,7 +274,7 @@ void Editor::setStateInternal(const EditorStatePtr& newState)
   m_observers.notifyStateChanged(this);
 
   // Redraw layer edges
-  if (m_docPref.show.layerEdges() && m_globPref.show.showExtras())
+  if (m_docPref.show.layerEdges())
     invalidate();
 
   // Setup the new mouse cursor
@@ -316,7 +314,7 @@ void Editor::setLayer(const Layer* layer)
     if (// If the onion skinning depends on the active layer
         m_docPref.onionskin.currentLayer() ||
         // If the user want to see the active layer edges...
-        (m_docPref.show.layerEdges() && m_globPref.show.showExtras())) {
+        m_docPref.show.layerEdges()) {
       // We've to redraw the whole editor
       invalidate();
     }
@@ -612,7 +610,7 @@ void Editor::drawSpriteUnclippedRect(ui::Graphics* g, const gfx::Rect& _rc)
       IntersectClip clip(g, cliprc);
 
       // Draw the pixel grid
-      if ((m_zoom.scale() > 2.0) && (m_docPref.show.pixelGrid() && m_globPref.show.showExtras())) {
+      if ((m_zoom.scale() > 2.0) && m_docPref.show.pixelGrid()) {
         int alpha = m_docPref.pixelGrid.opacity();
 
         if (m_docPref.pixelGrid.autoOpacity()) {
@@ -625,7 +623,7 @@ void Editor::drawSpriteUnclippedRect(ui::Graphics* g, const gfx::Rect& _rc)
       }
 
       // Draw the grid
-      if (m_docPref.show.grid() && m_globPref.show.showExtras()) {
+      if (m_docPref.show.grid()) {
         gfx::Rect gridrc = m_docPref.grid.bounds();
         if (m_zoom.apply(gridrc.w) > 2 &&
           m_zoom.apply(gridrc.h) > 2) {
@@ -683,7 +681,7 @@ void Editor::drawSpriteUnclippedRect(ui::Graphics* g, const gfx::Rect& _rc)
   }
 
   // Draw active cel edges
-  if (m_docPref.show.layerEdges() && m_globPref.show.showExtras() &&
+  if (m_docPref.show.layerEdges() &&
       // Show layer edges only on "standby" like states where brush
       // preview is shown (e.g. with this we avoid to showing the
       // edges in states like DrawingState, etc.).
@@ -733,7 +731,7 @@ void Editor::drawSpriteClipped(const gfx::Region& updateRegion)
 void Editor::drawMask(Graphics* g)
 {
   if ((m_flags & kShowMask) == 0 ||
-      !(m_docPref.show.selectionEdges() && m_globPref.show.showExtras()))
+      !m_docPref.show.selectionEdges())
     return;
 
   ASSERT(m_document->getMaskBoundaries());
