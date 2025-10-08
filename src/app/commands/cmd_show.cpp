@@ -28,13 +28,32 @@ public:
 
 protected:
   bool onChecked(Context* ctx) override {
-    DocumentPreferences& globPref = Preferences::instance().document(nullptr);
-    return globPref.show.showExtras();
+    DocumentPreferences& docPref = Preferences::instance().document(ctx->activeDocument());
+    return docPref.show.selectionEdges();
   }
 
   void onExecute(Context* ctx) override {
     DocumentPreferences& globPref = Preferences::instance().document(nullptr);
-    globPref.show.showExtras(!globPref.show.showExtras());
+    DocumentPreferences& docPref = Preferences::instance().document(ctx->activeDocument());
+    if (docPref.show.selectionEdges()) {
+      globPref.show = docPref.show;
+      docPref.show.selectionEdges(false);
+      docPref.show.layerEdges(false);
+      docPref.show.grid(false);
+      docPref.show.pixelGrid(false);
+    }
+    else {
+      docPref.show.selectionEdges(true);
+      docPref.show.layerEdges(
+        docPref.show.layerEdges() ||
+        globPref.show.layerEdges());
+      docPref.show.grid(
+        docPref.show.grid() ||
+        globPref.show.grid());
+      docPref.show.pixelGrid(
+        docPref.show.pixelGrid() ||
+        globPref.show.pixelGrid());
+    }
   }
 };
 
@@ -57,8 +76,6 @@ protected:
   void onExecute(Context* ctx) override {
     DocumentPreferences& docPref = Preferences::instance().document(ctx->activeDocument());
     docPref.show.layerEdges(!docPref.show.layerEdges());
-    DocumentPreferences& globPref = Preferences::instance().document(nullptr);
-    globPref.show.layerEdges = docPref.show.layerEdges;
   }
 };
 
@@ -81,8 +98,6 @@ protected:
   void onExecute(Context* ctx) override {
     DocumentPreferences& docPref = Preferences::instance().document(ctx->activeDocument());
     docPref.show.grid(!docPref.show.grid());
-    DocumentPreferences& globPref = Preferences::instance().document(nullptr);
-    globPref.show.grid = docPref.show.grid;
   }
 };
 
@@ -105,8 +120,6 @@ protected:
   void onExecute(Context* ctx) override {
     DocumentPreferences& docPref = Preferences::instance().document(ctx->activeDocument());
     docPref.show.pixelGrid(!docPref.show.pixelGrid());
-    DocumentPreferences& globPref = Preferences::instance().document(nullptr);
-    globPref.show.pixelGrid = docPref.show.pixelGrid;
   }
 };
 
@@ -129,8 +142,6 @@ protected:
   void onExecute(Context* ctx) override {
     DocumentPreferences& docPref = Preferences::instance().document(ctx->activeDocument());
     docPref.show.selectionEdges(!docPref.show.selectionEdges());
-    DocumentPreferences& globPref = Preferences::instance().document(nullptr);
-    globPref.show.selectionEdges = docPref.show.selectionEdges;
   }
 };
 

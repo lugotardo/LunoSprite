@@ -23,21 +23,13 @@ public:
     addFunction("clearParameters", [this]() {params.clear(); return this;});
 
     for (auto cmd : *app::CommandsModule::instance()) {
-        addFunction(cmd->id(), [this, cmd](script::Value::Map::data_t* map = nullptr){
+        addFunction(cmd->id(), [this, cmd]{
             app::UIContext* ctx = app::UIContext::instance();
             if (!ctx)
                 return 0;
             if (!cmd->isEnabled(ctx))
                 return 0;
-	    if (map) {
-		for (auto& entry : *map) {
-		    params.set(entry.first.c_str(), entry.second.str().c_str());
-		}
-	    }
             ctx->executeCommand(cmd, params);
-	    if (map) {
-		params.clear();
-	    }
             return 1;
         }).doc(cmd->friendlyName());
     }

@@ -65,12 +65,11 @@ public:
   }
 
   void putImageData(script::Value::Buffer& data) {
-    auto image = img();
-    if (data.size() != std::size_t(image->getRowStrideSize()*image->height())) {
+    if (data.size() != std::size_t(img()->getRowStrideSize()*img()->height())) {
       std::cout << "Data size mismatch: " << data.size() << std::endl;
       return;
     }
-    std::memcpy(image->getPixelAddress(0, 0), data.data(), data.size());
+    std::memcpy(img()->getPixelAddress(0, 0), data.data(), data.size());
     ui::Manager::getDefault()->invalidate();
   }
 
@@ -87,7 +86,7 @@ public:
     auto h = img()->height();
     std::shared_ptr<she::Surface> surface{
       she::instance()->createRgbaSurface(w, h),
-      [](she::Surface* s) {s->dispose();}
+      [](auto s) {s->dispose();}
     };
     if (!surface)
       return "";
